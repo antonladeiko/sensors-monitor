@@ -2,14 +2,20 @@ package com.labinvent.serversensorsmonitor.service.implementation;
 
 import com.labinvent.serversensorsmonitor.dto.MonitorDto;
 import com.labinvent.serversensorsmonitor.exceptions.NotFoundException;
+import com.labinvent.serversensorsmonitor.exceptions.ValueEntryException;
 import com.labinvent.serversensorsmonitor.mapper.MonitorMapper;
 import com.labinvent.serversensorsmonitor.model.Monitor;
 import com.labinvent.serversensorsmonitor.repository.MonitorRepository;
 import com.labinvent.serversensorsmonitor.service.MonitorService;
+import com.labinvent.serversensorsmonitor.web.constant.WebConstant;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.tools.Trace;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -36,6 +42,7 @@ public class MonitorServiceImpl implements MonitorService {
     @Override
     public MonitorDto create(MonitorDto monitorDto) {
         Monitor monitor = monitorMapper.monitorDtoToMonitor(monitorDto);
+        rangeValid(monitor.getRangeTo(), monitor.getRangeFrom());
         monitorRepository.save(monitor);
         log.info("Saving Monitor: {}", monitor);
         return monitorMapper.monitorToMonitorDto(monitor);
@@ -43,6 +50,7 @@ public class MonitorServiceImpl implements MonitorService {
 
     @Override
     public List<MonitorDto> list() {
+        log.info("Fetching a list of monitors");
         List<Monitor> monitorList = monitorRepository.findAll();
         log.info("Received list monitors: {}", monitorList);
 
@@ -65,7 +73,8 @@ public class MonitorServiceImpl implements MonitorService {
     @Override
     public MonitorDto update(MonitorDto monitorDto) {
         Monitor monitor = monitorMapper.monitorDtoToMonitor(monitorDto);
-        monitorRepository.save(monitor);
+        rangeValid(monitor.getRangeTo(), monitor.getRangeFrom());
+        monitorRepository.saveAndFlush(monitor);
         log.info("Saved updated monitor: {}", monitor);
 
         return monitorMapper.monitorToMonitorDto(monitor);
@@ -76,5 +85,11 @@ public class MonitorServiceImpl implements MonitorService {
         log.info("Deleting monitor by id: {}", id);
         monitorRepository.deleteById(id);
         return Boolean.TRUE;
+    }
+
+    private void rangeValid(int to, int from){
+        if (from >= to){
+            throw new ValueEntryException(WebConstant.WRONG_ENTRY_MESSAGE);
+        }
     }
 }

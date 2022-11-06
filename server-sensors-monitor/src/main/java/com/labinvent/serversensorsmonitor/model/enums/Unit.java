@@ -1,15 +1,19 @@
 package com.labinvent.serversensorsmonitor.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
 public enum Unit {
     BAR("bar"),
-    VOLTAGE("VOLTAGE"),
+    VOLTAGE("voltage"),
     CELSIUS("℃"),
     PERCENT("%");
 
-    private final String unit;
+    private String unit;
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    private Unit(String unit){
+        this.unit = unit;
+    }
 }

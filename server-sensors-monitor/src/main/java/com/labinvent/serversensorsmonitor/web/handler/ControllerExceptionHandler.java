@@ -1,6 +1,7 @@
 package com.labinvent.serversensorsmonitor.web.handler;
 
 import com.labinvent.serversensorsmonitor.exceptions.NotFoundException;
+import com.labinvent.serversensorsmonitor.exceptions.ValueEntryException;
 import com.labinvent.serversensorsmonitor.web.response.BaseWebResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.xml.bind.ValidationException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +21,14 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<BaseWebResponse> handleNotFoundException(NotFoundException exception){
+        log.error(exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new BaseWebResponse(exception.getMessage()));
+    }
+
+    @ExceptionHandler(ValueEntryException.class)
+    public ResponseEntity<BaseWebResponse> handleNotFoundException(ValueEntryException exception){
         log.error(exception.getMessage());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)

@@ -8,6 +8,7 @@ import com.labinvent.serversensorsmonitor.web.response.MonitorResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import java.util.List;
 import java.util.Map;
 import static java.time.LocalDateTime.now;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -37,6 +38,9 @@ public class MonitorDataFacade {
     public MonitorResponse getList(){
         log.info("Got list of monitors request");
 
+        List<MonitorDto> monitors = monitorService.list();
+        log.info("List: {}", monitors);
+
         return MonitorResponse.builder()
                 .time(now())
                 .data(Map.of("monitors", monitorService.list()))
@@ -47,7 +51,9 @@ public class MonitorDataFacade {
     }
 
     public MonitorResponse getMonitorById(Long id){
-        log.info("Got monitor request by name: {}", id);
+        log.info("Got monitor request by id: {}", id);
+
+        log.info("monitor: {}", monitorService.get(id));
 
         return MonitorResponse.builder()
                 .time(now())
@@ -88,7 +94,7 @@ public class MonitorDataFacade {
 
         return MonitorResponse.builder()
                 .time(now())
-                .data(Map.of("monitor", monitorService.delete(id)))
+                .data(Map.of("removed monitor", monitorService.delete(id)))
                 .status(OK)
                 .statusCode(OK.value())
                 .message("Monitor was deleted")

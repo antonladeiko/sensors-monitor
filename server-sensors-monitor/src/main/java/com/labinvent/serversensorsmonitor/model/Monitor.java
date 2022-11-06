@@ -6,7 +6,6 @@ import com.labinvent.serversensorsmonitor.web.constant.WebConstant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -30,6 +29,7 @@ public class Monitor {
 
     @Column(name = "range_from")
     private int rangeFrom;
+
     @Column(name = "range_to")
     private int rangeTo;
 

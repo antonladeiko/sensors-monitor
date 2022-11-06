@@ -26,6 +26,13 @@ public class MonitorController {
         return response;
     }
 
+    @GetMapping("/{id}")
+    public MonitorResponse getById(@PathVariable Long id){
+        MonitorResponse response = monitorDataFacade.getMonitorById(id);
+        log.info("Response with get monitor by id: {}", response);
+        return response;
+    }
+
     @PostMapping("/create")
     public MonitorResponse createMonitor(@RequestBody @Valid Monitor monitor){
         MonitorResponse response = monitorDataFacade.createMonitor(monitor);

@@ -6,8 +6,9 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface MonitorMapper {
-
+    //@Mapping(target = "id", ignore = true)
     MonitorDto monitorToMonitorDto(Monitor monitor);
 
+    //@Mapping(target = "id", ignore = true)
     Monitor monitorDtoToMonitor(MonitorDto monitorDto);
 }

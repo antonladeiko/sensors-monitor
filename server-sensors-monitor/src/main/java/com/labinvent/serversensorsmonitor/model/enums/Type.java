@@ -1,15 +1,18 @@
 package com.labinvent.serversensorsmonitor.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
 public enum Type {
     PRESSURE("Pressure"),
-    VOLTAGE("VOLTAGE"),
+    VOLTAGE("Voltage"),
     TEMPERATURE("Temperature"),
     HUMIDITY("Humidity");
 
-    private final String type;
+    private String type;
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    private Type(String type){
+        this.type = type;
+    }
 }
