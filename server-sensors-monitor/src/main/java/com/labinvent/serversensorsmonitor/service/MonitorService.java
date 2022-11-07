@@ -1,7 +1,6 @@
 package com.labinvent.serversensorsmonitor.service;
 
 import com.labinvent.serversensorsmonitor.dto.MonitorDto;
-import com.labinvent.serversensorsmonitor.model.Monitor;
 
 import java.util.List;
 

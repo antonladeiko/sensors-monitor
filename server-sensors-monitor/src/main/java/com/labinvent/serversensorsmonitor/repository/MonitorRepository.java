@@ -1,6 +1,6 @@
 package com.labinvent.serversensorsmonitor.repository;
 
-import com.labinvent.serversensorsmonitor.model.Monitor;
+import com.labinvent.serversensorsmonitor.model.entity.Monitor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

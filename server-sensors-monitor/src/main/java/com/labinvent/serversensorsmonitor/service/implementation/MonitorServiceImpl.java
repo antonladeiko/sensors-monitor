@@ -4,17 +4,14 @@ import com.labinvent.serversensorsmonitor.dto.MonitorDto;
 import com.labinvent.serversensorsmonitor.exceptions.NotFoundException;
 import com.labinvent.serversensorsmonitor.exceptions.ValueEntryException;
 import com.labinvent.serversensorsmonitor.mapper.MonitorMapper;
-import com.labinvent.serversensorsmonitor.model.Monitor;
+import com.labinvent.serversensorsmonitor.model.entity.Monitor;
 import com.labinvent.serversensorsmonitor.repository.MonitorRepository;
 import com.labinvent.serversensorsmonitor.service.MonitorService;
 import com.labinvent.serversensorsmonitor.web.constant.WebConstant;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.tools.Trace;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
 import java.util.Objects;

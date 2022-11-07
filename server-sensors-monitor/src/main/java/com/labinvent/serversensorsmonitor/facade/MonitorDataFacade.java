@@ -2,7 +2,7 @@ package com.labinvent.serversensorsmonitor.facade;
 
 import com.labinvent.serversensorsmonitor.dto.MonitorDto;
 import com.labinvent.serversensorsmonitor.mapper.MonitorMapper;
-import com.labinvent.serversensorsmonitor.model.Monitor;
+import com.labinvent.serversensorsmonitor.model.entity.Monitor;
 import com.labinvent.serversensorsmonitor.service.MonitorService;
 import com.labinvent.serversensorsmonitor.web.response.MonitorResponse;
 import lombok.AllArgsConstructor;
