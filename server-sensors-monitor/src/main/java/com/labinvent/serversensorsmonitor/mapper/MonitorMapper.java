@@ -1,7 +1,7 @@
 package com.labinvent.serversensorsmonitor.mapper;
 
 import com.labinvent.serversensorsmonitor.dto.MonitorDto;
-import com.labinvent.serversensorsmonitor.model.Monitor;
+import com.labinvent.serversensorsmonitor.model.entity.Monitor;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

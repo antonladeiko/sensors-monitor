@@ -1,4 +1,4 @@
-package com.labinvent.serversensorsmonitor.model;
+package com.labinvent.serversensorsmonitor.model.entity;
 
 import com.labinvent.serversensorsmonitor.model.enums.Type;
 import com.labinvent.serversensorsmonitor.model.enums.Unit;
